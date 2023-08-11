@@ -1,5 +1,6 @@
 import express, { Application } from 'express';
-import { getConnection } from './infra/mongodb/database';
+import { connect } from './infra/mongodb/database';
+import { errorMiddleware } from './middlewares/error.middleware';
 
 class App{
   public app: Application;
@@ -9,24 +10,20 @@ class App{
     this.middlewares();
     this.connectDatabase();
     this.routes();
-    this.errors();
   }
 
   middlewares(){
     this.app.use(express.json());
     this.app.use(express.urlencoded({extended: true}));
+    this.app.use(errorMiddleware)
   }
 
   routes(){
 
   }
 
-  errors(){
-
-  }
-
   connectDatabase(){
-    getConnection();
+    connect();
   }
 
   listen(){

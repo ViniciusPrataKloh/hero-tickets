@@ -1,7 +1,7 @@
 require('dotenv/config');
 import mongoose from "mongoose";
 
-export async function getConnection(){
+export async function connect(){
   try{
     const username = process.env.MONGODB_USERNAME;
     const password = process.env.MONGODB_PASSWORD;
