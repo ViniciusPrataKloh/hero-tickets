@@ -1,9 +1,12 @@
 import express, { Application } from 'express';
+import { errorMiddleware } from './application/middlewares/error.middleware';
+import { EventsRoutes } from './application/routes/events.routes';
 import { connect } from './infra/mongodb/database';
-import { errorMiddleware } from './middlewares/error.middleware';
 
 class App{
   public app: Application;
+  
+  private eventsRoutes = new EventsRoutes();
 
   constructor(){
     this.app = express();
@@ -19,7 +22,7 @@ class App{
   }
 
   routes(){
-
+    this.app.use('/events', this.eventsRoutes.router);
   }
 
   connectDatabase(){
