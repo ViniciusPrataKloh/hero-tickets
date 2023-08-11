@@ -10,19 +10,23 @@ class App{
 
   constructor(){
     this.app = express();
-    this.middlewares();
+    this.initMiddlewares();
+    this.initRoutes();
+    this.initInterceptionError();
     this.connectDatabase();
-    this.routes();
   }
 
-  middlewares(){
+  initMiddlewares(){
     this.app.use(express.json());
     this.app.use(express.urlencoded({extended: true}));
-    this.app.use(errorMiddleware)
   }
 
-  routes(){
+  initRoutes(){
     this.app.use('/events', this.eventsRoutes.router);
+  }
+
+  initInterceptionError(){
+    this.app.use(errorMiddleware)
   }
 
   connectDatabase(){

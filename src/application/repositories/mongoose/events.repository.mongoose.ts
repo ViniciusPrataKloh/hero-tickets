@@ -1,5 +1,6 @@
 import { Event } from "../../../domain/entities/event.entity";
-import { IEventsRepository } from "../events.respository.interface";
+import { IEventsRepository } from "../events.repository";
+
 import { EventModel } from "./events.model";
 
 class EventsRepositoryMongoose implements IEventsRepository{
